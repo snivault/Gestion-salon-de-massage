@@ -1,9 +1,17 @@
 package com.snivault.gestionsalonmassage.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -18,16 +26,28 @@ public class Client {
 	@Column(name = "c_adresse")
 	private String adresse;
 
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "v_carte_fidelite_id")
+	private CarteFidelite carteFidelite;
+
 	@Id
 	@GeneratedValue
 	@Column(name = "c_client_id")
 	private int clientId;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "c_problematique_id")
+	private List<Problematique> listProblematiques;
 
 	@Column(name = "c_mail")
 	private String mail;
 
 	@Column(name = "c_nom")
 	private String nom;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "c_origine_contact_id")
+	private OrigineContact origineContact;
 
 	@Column(name = "c_prenom")
 	private String prenom;
@@ -46,10 +66,24 @@ public class Client {
 	}
 
 	/**
+	 * @return the carteFidelite
+	 */
+	public CarteFidelite getCarteFidelite() {
+		return carteFidelite;
+	}
+
+	/**
 	 * @return the clientId
 	 */
 	public int getClientId() {
 		return clientId;
+	}
+
+	/**
+	 * @return the listProblematiques
+	 */
+	public List<Problematique> getListProblematiques() {
+		return listProblematiques;
 	}
 
 	/**
@@ -64,6 +98,13 @@ public class Client {
 	 */
 	public String getNom() {
 		return nom;
+	}
+
+	/**
+	 * @return the origineContact
+	 */
+	public OrigineContact getOrigineContact() {
+		return origineContact;
 	}
 
 	/**
@@ -95,10 +136,24 @@ public class Client {
 	}
 
 	/**
+	 * @param carteFidelite the carteFidelite to set
+	 */
+	public void setCarteFidelite(CarteFidelite carteFidelite) {
+		this.carteFidelite = carteFidelite;
+	}
+
+	/**
 	 * @param clientId the clientId to set
 	 */
 	public void setClientId(int clientId) {
 		this.clientId = clientId;
+	}
+
+	/**
+	 * @param listProblematiques the listProblematiques to set
+	 */
+	public void setListProblematiques(List<Problematique> listProblematiques) {
+		this.listProblematiques = listProblematiques;
 	}
 
 	/**
@@ -113,6 +168,13 @@ public class Client {
 	 */
 	public void setNom(String nom) {
 		this.nom = nom;
+	}
+
+	/**
+	 * @param origineContact the origineContact to set
+	 */
+	public void setOrigineContact(OrigineContact origineContact) {
+		this.origineContact = origineContact;
 	}
 
 	/**

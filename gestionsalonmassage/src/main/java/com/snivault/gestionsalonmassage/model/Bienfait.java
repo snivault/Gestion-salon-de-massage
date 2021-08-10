@@ -1,13 +1,19 @@
 package com.snivault.gestionsalonmassage.model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
- * Comment la personne a connu le salon de massage.
+ * Binefait d'un massage (ex : relaxant, harmonise l'énergie).
  * 
  * @author Nous
  *
@@ -22,6 +28,10 @@ public class Bienfait {
 
 	@Column(name = "m_libelle")
 	private String libelle;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "c_problematique")
+	private List<Problematique> listProblematiques;
 
 	/**
 	 * @return the bienfaitId
@@ -38,6 +48,13 @@ public class Bienfait {
 	}
 
 	/**
+	 * @return the listProblematiques
+	 */
+	public List<Problematique> getListProblematiques() {
+		return listProblematiques;
+	}
+
+	/**
 	 * @param bienfaitId the bienfaitId to set
 	 */
 	public void setBienfaitId(int bienfaitId) {
@@ -49,6 +66,13 @@ public class Bienfait {
 	 */
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
+	}
+
+	/**
+	 * @param listProblematiques the listProblematiques to set
+	 */
+	public void setListProblematiques(List<Problematique> listProblematiques) {
+		this.listProblematiques = listProblematiques;
 	}
 
 }

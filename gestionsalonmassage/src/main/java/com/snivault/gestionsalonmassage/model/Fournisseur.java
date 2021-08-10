@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Classe représentant un client du salon de massage.
+ * Fournisseur du salon (ex : Naissance pour les huiles).
  * 
  * @author Nous
  *

@@ -1,15 +1,22 @@
 package com.snivault.gestionsalonmassage.model;
 
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Exemple de problématique (arthrose, manque de sommeil, surpoids...).
+ * Achats à apparaître dans le registre d'achat effectué auprès d'un
+ * fournisseur.
  * 
  * @author Nous
  *
@@ -25,8 +32,16 @@ public class Achat {
 	@Column(name = "m_date_achat")
 	private Date dateAchat;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "m_produit_fini")
+	private List<ProduitFini> listProduits;
+
 	@Column(name = "m_montant")
 	private float montant;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "va_moyen_paiement")
+	private MoyenPaiement moyenPaiement;
 
 	/**
 	 * @return the achatId
@@ -43,10 +58,24 @@ public class Achat {
 	}
 
 	/**
+	 * @return the listProduits
+	 */
+	public List<ProduitFini> getListProduits() {
+		return listProduits;
+	}
+
+	/**
 	 * @return the montant
 	 */
 	public float getMontant() {
 		return montant;
+	}
+
+	/**
+	 * @return the moyenPaiement
+	 */
+	public MoyenPaiement getMoyenPaiement() {
+		return moyenPaiement;
 	}
 
 	/**
@@ -64,10 +93,24 @@ public class Achat {
 	}
 
 	/**
+	 * @param listProduits the listProduits to set
+	 */
+	public void setListProduits(List<ProduitFini> listProduits) {
+		this.listProduits = listProduits;
+	}
+
+	/**
 	 * @param montant the montant to set
 	 */
 	public void setMontant(float montant) {
 		this.montant = montant;
+	}
+
+	/**
+	 * @param moyenPaiement the moyenPaiement to set
+	 */
+	public void setMoyenPaiement(MoyenPaiement moyenPaiement) {
+		this.moyenPaiement = moyenPaiement;
 	}
 
 }
