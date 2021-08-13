@@ -35,10 +35,24 @@ public class ChequeCadeau extends Vente {
 	private String pourQui;
 
 	/**
+	 * @return the pourQuelClient
+	 */
+	public Client getPourQuelClient() {
+		return pourQuelClient;
+	}
+
+	/**
 	 * @return the pourQui
 	 */
 	public String getPourQui() {
 		return pourQui;
+	}
+
+	/**
+	 * @param pourQuelClient the pourQuelClient to set
+	 */
+	public void setPourQuelClient(Client pourQuelClient) {
+		this.pourQuelClient = pourQuelClient;
 	}
 
 	/**

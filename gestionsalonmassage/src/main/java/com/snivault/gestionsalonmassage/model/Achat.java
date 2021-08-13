@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -33,7 +34,7 @@ public class Achat {
 	private Date dateAchat;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "m_produit_fini")
+	@JoinTable(name = "m_achat_produit_fini", joinColumns = @JoinColumn(name = "m_achat_id"), inverseJoinColumns = @JoinColumn(name = "m_produit_id"))
 	private List<ProduitFini> listProduits;
 
 	@Column(name = "m_montant")

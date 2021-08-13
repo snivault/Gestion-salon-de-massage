@@ -9,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -30,7 +31,7 @@ public class Bienfait {
 	private String libelle;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "c_problematique")
+	@JoinTable(name = "m_bienfait_problematique", joinColumns = @JoinColumn(name = "m_bienfait_id"), inverseJoinColumns = @JoinColumn(name = "c_problematique_id"))
 	private List<Problematique> listProblematiques;
 
 	/**

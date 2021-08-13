@@ -9,8 +9,11 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -22,6 +25,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "c_client")
+@NamedEntityGraph(name = "client.listproblematiques", attributeNodes = @NamedAttributeNode("listProblematiques"))
 public class Client {
 	@Column(name = "c_adresse")
 	private String adresse;
@@ -36,7 +40,7 @@ public class Client {
 	private int clientId;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "c_problematique_id")
+	@JoinTable(name = "c_client_problematique", joinColumns = @JoinColumn(name = "c_client_id"), inverseJoinColumns = @JoinColumn(name = "c_problematique_id"))
 	private List<Problematique> listProblematiques;
 
 	@Column(name = "c_mail")

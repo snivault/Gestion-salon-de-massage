@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,7 +22,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "v_rendez_vous_massage")
 public class RendezVousMassage extends Vente {
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "v_cheque_cadeau_id")
 	private ChequeCadeau chequeCadeau;
 
@@ -32,13 +33,13 @@ public class RendezVousMassage extends Vente {
 	@JoinColumn(name = "m_produit_id")
 	private HuileMassage huileMassage;
 
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "v_rendez_vous_massage_problematique", joinColumns = @JoinColumn(name = "v_vente_id"), inverseJoinColumns = @JoinColumn(name = "c_problematique_id"))
+	private List<Problematique> listProblematiques;
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "m_massage_id")
 	private Massage massage;
-
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "c_problematique_id")
-	private List<Problematique> problematique;
 
 	@Column(name = "v_remarque_masse")
 	private Date remarqueMasse;
@@ -61,17 +62,24 @@ public class RendezVousMassage extends Vente {
 	}
 
 	/**
+	 * @return the huileMassage
+	 */
+	public HuileMassage getHuileMassage() {
+		return huileMassage;
+	}
+
+	/**
+	 * @return the listProblematiques
+	 */
+	public List<Problematique> getListProblematiques() {
+		return listProblematiques;
+	}
+
+	/**
 	 * @return the massage
 	 */
 	public Massage getMassage() {
 		return massage;
-	}
-
-	/**
-	 * @return the problematique
-	 */
-	public List<Problematique> getProblematique() {
-		return problematique;
 	}
 
 	/**
@@ -103,17 +111,24 @@ public class RendezVousMassage extends Vente {
 	}
 
 	/**
+	 * @param huileMassage the huileMassage to set
+	 */
+	public void setHuileMassage(HuileMassage huileMassage) {
+		this.huileMassage = huileMassage;
+	}
+
+	/**
+	 * @param listProblematiques the listProblematiques to set
+	 */
+	public void setListProblematiques(List<Problematique> listProblematiques) {
+		this.listProblematiques = listProblematiques;
+	}
+
+	/**
 	 * @param massage the massage to set
 	 */
 	public void setMassage(Massage massage) {
 		this.massage = massage;
-	}
-
-	/**
-	 * @param problematique the problematique to set
-	 */
-	public void setProblematique(List<Problematique> problematique) {
-		this.problematique = problematique;
 	}
 
 	/**

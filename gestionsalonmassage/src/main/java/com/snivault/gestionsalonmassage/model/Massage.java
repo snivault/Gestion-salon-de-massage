@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -33,7 +34,7 @@ public class Massage extends ProduitMixteAbstract {
 	private String libelle;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "m_bienfait")
+	@JoinTable(name = "m_massage_bienfait", joinColumns = @JoinColumn(name = "m_produit_id"), inverseJoinColumns = @JoinColumn(name = "m_bienfait_id"))
 	private List<Bienfait> listBienfaits;
 
 	@Column(name = "m_tarif_prevu")

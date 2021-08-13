@@ -42,9 +42,23 @@ public class CarteFidelite {
 	}
 
 	/**
+	 * @return the listCaseCochees
+	 */
+	public List<CaseCocheeFidelite> getListCaseCochees() {
+		return listCaseCochees;
+	}
+
+	/**
 	 * @param carteFideliteId the carteFideliteId to set
 	 */
 	public void setCarteFideliteId(int carteFideliteId) {
 		this.carteFideliteId = carteFideliteId;
+	}
+
+	/**
+	 * @param listCaseCochees the listCaseCochees to set
+	 */
+	public void setListCaseCochees(List<CaseCocheeFidelite> listCaseCochees) {
+		this.listCaseCochees = listCaseCochees;
 	}
 }

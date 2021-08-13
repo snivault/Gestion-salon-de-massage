@@ -36,6 +36,13 @@ public class CaseCocheeFidelite {
 	private ProduitFini produitFini;
 
 	/**
+	 * @return the carteFidelite
+	 */
+	public CarteFidelite getCarteFidelite() {
+		return carteFidelite;
+	}
+
+	/**
 	 * @return the caseCocheeFideliteId
 	 */
 	public int getCaseCocheeFideliteId() {
@@ -54,6 +61,13 @@ public class CaseCocheeFidelite {
 	 */
 	public ProduitFini getProduitFini() {
 		return produitFini;
+	}
+
+	/**
+	 * @param carteFidelite the carteFidelite to set
+	 */
+	public void setCarteFidelite(CarteFidelite carteFidelite) {
+		this.carteFidelite = carteFidelite;
 	}
 
 	/**

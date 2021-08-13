@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -26,7 +27,7 @@ import javax.persistence.Table;
 @DiscriminatorColumn(name = "m_produit_type")
 public class ProduitFini extends ProduitMixteAbstract {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name = "m_fournisseur")
+	@JoinTable(name = "m_produit_fini_fournisseur", joinColumns = @JoinColumn(name = "m_produit_id"), inverseJoinColumns = @JoinColumn(name = "m_fournisseur_id"))
 	private List<Fournisseur> listFournisseurs;
 
 	@Column(name = "m_reference")
