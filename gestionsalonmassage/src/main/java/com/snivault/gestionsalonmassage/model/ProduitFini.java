@@ -12,6 +12,8 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +27,8 @@ import javax.persistence.Table;
 @Table(name = "m_produit_fini")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "m_produit_type")
+
+@NamedEntityGraph(name = "produitfinit.listfournisseurs", attributeNodes = @NamedAttributeNode("listFournisseurs"))
 public class ProduitFini extends ProduitMixteAbstract {
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "m_produit_fini_fournisseur", joinColumns = @JoinColumn(name = "m_produit_id"), inverseJoinColumns = @JoinColumn(name = "m_fournisseur_id"))
@@ -35,6 +39,10 @@ public class ProduitFini extends ProduitMixteAbstract {
 
 	@Column(name = "m_tarif")
 	private String tarif;
+
+	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinTable(name = "v_ventes_produits_finis", joinColumns = @JoinColumn(name = "m_produit_fini_id"), inverseJoinColumns = @JoinColumn(name = "v_vente_id"))
+	private List<VenteProduitFini> venteProduitFini;
 
 	/**
 	 * @return the listFournisseurs

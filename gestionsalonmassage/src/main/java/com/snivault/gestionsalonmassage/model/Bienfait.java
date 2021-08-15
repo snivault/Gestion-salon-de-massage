@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "m_bienfait")
+@NamedEntityGraph(name = "bienfait.listproblematiques", attributeNodes = @NamedAttributeNode("listProblematiques"))
 public class Bienfait {
 	@Id
 	@GeneratedValue

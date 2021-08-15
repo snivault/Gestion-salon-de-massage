@@ -1,12 +1,11 @@
 package com.snivault.gestionsalonmassage.dao.service;
 
-import java.util.Map;
-import java.util.function.Predicate;
+import java.util.List;
 
-import com.snivault.gestionsalonmassage.model.Achat;
-import com.snivault.gestionsalonmassage.model.ChequeCadeau;
-import com.snivault.gestionsalonmassage.model.RendezVousMassage;
-import com.snivault.gestionsalonmassage.model.Vente;
+import org.springframework.data.jpa.repository.Query;
+
+import com.snivault.gestionsalonmassage.dao.ViewRegistreAchatsDepensesAutresDao;
+import com.snivault.gestionsalonmassage.dao.ViewVentesChqRdvProduitDao;
 
 /**
  * Interface permettant de gérer les chiffres des ventes et des achats.
@@ -16,49 +15,21 @@ import com.snivault.gestionsalonmassage.model.Vente;
  */
 public interface ComptabiliteService {
 	/**
-	 * Consulter la liste des achats avec ou sans filtres.
-	 * 
-	 * @param colonnesFiltrees la clé est le nom de la colonne à filtrer, la valeur
-	 *                         est la valeur de la colonne à filtrer.
-	 * @return liste filtrées.
-	 */
-	Predicate<Achat> consulterListeAchats(Map<String, String> colonnesFiltrees);
-
-	/**
 	 * Consulter la liste des ventes avec ou sans filtres (Toutes les ventes
 	 * massages, chèques cadeau et produits finis).
 	 * 
-	 * @param colonnesFiltrees la clé est le nom de la colonne à filtrer, la valeur
-	 *                         est la valeur de la colonne à filtrer.
 	 * @return liste filtrées.
 	 */
-	Predicate<Vente> consulterListeVentes(Map<String, String> colonnesFiltrees);
+	@Query(nativeQuery = true, value = "SELECT * FROM v_ventes_chq_rdv_produit")
+	List<ViewVentesChqRdvProduitDao> consulterListeVentes();
 
 	/**
-	 * Consulter la liste des rendez-vous de massages avec ou sans filtres.
+	 * Consulter la liste des achats (correspondant au registres des achats et
+	 * dépenses autres).
 	 * 
-	 * @param colonnesFiltrees la clé est le nom de la colonne à filtrer, la valeur
-	 *                         est la valeur de la colonne à filtrer.
-	 * @return liste filtrées.
+	 * @return la liste.
 	 */
-	Predicate<RendezVousMassage> consulterRendezVousMassages(Map<String, String> colonnesFiltrees);
-
-	/**
-	 * Consulter la liste des ventes de chèques cadeau avec ou sans filtres.
-	 * 
-	 * @param colonnesFiltrees la clé est le nom de la colonne à filtrer, la valeur
-	 *                         est la valeur de la colonne à filtrer.
-	 * @return liste filtrées.
-	 */
-	Predicate<ChequeCadeau> consulterVentesChequesCadeaux(Map<String, String> colonnesFiltrees);
-
-	/**
-	 * Consulter la liste des ventes de produits finis avec ou sans filtres.
-	 * 
-	 * @param colonnesFiltrees la clé est le nom de la colonne à filtrer, la valeur
-	 *                         est la valeur de la colonne à filtrer.
-	 * @return liste filtrées.
-	 */
-	Predicate<ChequeCadeau> consulterVentesProduitsFinis(Map<String, String> colonnesFiltrees);
+	@Query(nativeQuery = true, value = "SELECT * FROM m_registre_achats_depenses_autres")
+	public List<ViewRegistreAchatsDepensesAutresDao> consulterRegistreAchatsDepensesAutres();
 
 }

@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
 /**
@@ -24,6 +26,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "m_achat")
+@NamedEntityGraph(name = "achat.listproduits", attributeNodes = @NamedAttributeNode("listProduits"))
 public class Achat {
 	@Id
 	@GeneratedValue
@@ -39,10 +42,12 @@ public class Achat {
 
 	@Column(name = "m_montant")
 	private float montant;
-
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "va_moyen_paiement")
+	@JoinColumn(name = "va_moyen_paiement_id")
 	private MoyenPaiement moyenPaiement;
+
+	@Column(name = "m_type_achat")
+	private String typeAchat;
 
 	/**
 	 * @return the achatId
@@ -80,6 +85,13 @@ public class Achat {
 	}
 
 	/**
+	 * @return the typeAchat
+	 */
+	public String getTypeAchat() {
+		return typeAchat;
+	}
+
+	/**
 	 * @param achatId the achatId to set
 	 */
 	public void setAchatId(int achatId) {
@@ -112,6 +124,13 @@ public class Achat {
 	 */
 	public void setMoyenPaiement(MoyenPaiement moyenPaiement) {
 		this.moyenPaiement = moyenPaiement;
+	}
+
+	/**
+	 * @param typeAchat the typeAchat to set
+	 */
+	public void setTypeAchat(String typeAchat) {
+		this.typeAchat = typeAchat;
 	}
 
 }

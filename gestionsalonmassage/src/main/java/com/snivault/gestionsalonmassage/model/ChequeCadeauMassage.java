@@ -9,24 +9,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
- * Le ou les rdv effectués par chèque cadeau.
+ * Table d'association pour les massages prévu pour un chèque cadeau. Si pas de
+ * ligne pour le chèque cadeau, alors on considère que c'est un massage au
+ * choix.
  * 
  * @author Nous
  *
  */
-@Table(name = "v_cheque_cadeau_rdv_massage")
-public class ChequeCadeauRdvMassage {
+@Table(name = "v_cheque_cadeau_massage")
+public class ChequeCadeauMassage {
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "v_cheque_cadeau_id")
 	private ChequeCadeau chequeCadeau;
 
 	@Id
 	@GeneratedValue
-	@Column(name = "v_cheque_cadeau_rdv_massage_id")
+	@Column(name = "v_cheque_cadeau_massage_id")
 	private int chequeCadeauRdvMassageId;
+
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "v_rendez_vous_massage_id")
-	private RendezVousMassage rendezVousMassage;
+	@JoinColumn(name = "m_massage_id")
+	private Massage massage;
 
 	/**
 	 * @return the chequeCadeau
@@ -43,10 +46,10 @@ public class ChequeCadeauRdvMassage {
 	}
 
 	/**
-	 * @return the rendezVousMassage
+	 * @return the massage
 	 */
-	public RendezVousMassage getRendezVousMassage() {
-		return rendezVousMassage;
+	public Massage getMassage() {
+		return massage;
 	}
 
 	/**
@@ -64,9 +67,9 @@ public class ChequeCadeauRdvMassage {
 	}
 
 	/**
-	 * @param rendezVousMassage the rendezVousMassage to set
+	 * @param massage the massage to set
 	 */
-	public void setRendezVousMassage(RendezVousMassage rendezVousMassage) {
-		this.rendezVousMassage = rendezVousMassage;
+	public void setMassage(Massage massage) {
+		this.massage = massage;
 	}
 }

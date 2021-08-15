@@ -11,6 +11,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedSubgraph;
 import javax.persistence.Table;
 
 /**
@@ -22,6 +25,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "m_massage")
+@NamedEntityGraph(name = "massage.listbienfaits", attributeNodes = @NamedAttributeNode(value = "listBienfaits", subgraph = "bienfait.listproblematiques"), subgraphs = {
+		@NamedSubgraph(name = "bienfait.listproblematiques", attributeNodes = @NamedAttributeNode(value = "listProblematiques")) })
 public class Massage extends ProduitMixteAbstract {
 	@Column(name = "m_duree_prevue_m")
 	private Date dureePrevue;

@@ -7,6 +7,6 @@ import com.snivault.gestionsalonmassage.model.CarteFidelite;
 
 public interface CarteFideliteDao extends JpaRepository<CarteFidelite, Integer> {
 	@Override
-	@EntityGraph(value = "carteFidelite.listcasecochee")
+	@EntityGraph(value = "cartefidelite.listcasecochee")
 	CarteFidelite getById(Integer carteFideliteId);
 }

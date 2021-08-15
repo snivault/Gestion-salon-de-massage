@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 
 /**
@@ -21,6 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "v_rendez_vous_massage")
+@NamedEntityGraph(name = "rendezvousmassage.listproblematiques", attributeNodes = @NamedAttributeNode("listProblematiques"))
 public class RendezVousMassage extends Vente {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "v_cheque_cadeau_id")
@@ -42,10 +45,10 @@ public class RendezVousMassage extends Vente {
 	private Massage massage;
 
 	@Column(name = "v_remarque_masse")
-	private Date remarqueMasse;
+	private String remarqueMasse;
 
 	@Column(name = "v_remarque_moi")
-	private Date remarqueMoi;
+	private String remarqueMoi;
 
 	/**
 	 * @return the chequeCadeau
@@ -85,14 +88,14 @@ public class RendezVousMassage extends Vente {
 	/**
 	 * @return the remarqueMasse
 	 */
-	public Date getRemarqueMasse() {
+	public String getRemarqueMasse() {
 		return remarqueMasse;
 	}
 
 	/**
 	 * @return the remarqueMoi
 	 */
-	public Date getRemarqueMoi() {
+	public String getRemarqueMoi() {
 		return remarqueMoi;
 	}
 
@@ -134,14 +137,14 @@ public class RendezVousMassage extends Vente {
 	/**
 	 * @param remarqueMasse the remarqueMasse to set
 	 */
-	public void setRemarqueMasse(Date remarqueMasse) {
+	public void setRemarqueMasse(String remarqueMasse) {
 		this.remarqueMasse = remarqueMasse;
 	}
 
 	/**
 	 * @param remarqueMoi the remarqueMoi to set
 	 */
-	public void setRemarqueMoi(Date remarqueMoi) {
+	public void setRemarqueMoi(String remarqueMoi) {
 		this.remarqueMoi = remarqueMoi;
 	}
 }

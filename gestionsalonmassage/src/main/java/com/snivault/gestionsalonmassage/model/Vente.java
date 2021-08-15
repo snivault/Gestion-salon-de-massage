@@ -3,7 +3,6 @@ package com.snivault.gestionsalonmassage.model;
 import java.util.Date;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,8 +10,9 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MappedSuperclass;
 
-import com.snivault.gestionsalonmassage.enums.NatureAchatVenteType;
+import com.snivault.gestionsalonmassage.enums.NatureVenteType;
 
 /**
  * Vente de massage ou de produit comme une huile de massage.
@@ -20,7 +20,7 @@ import com.snivault.gestionsalonmassage.enums.NatureAchatVenteType;
  * @author Nous
  *
  */
-@Entity
+@MappedSuperclass
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class Vente {
 
@@ -35,14 +35,14 @@ public abstract class Vente {
 	private float montantEncaisse;
 
 	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "va_moyen_paiement")
+	@JoinColumn(name = "va_moyen_paiement_id")
 	private MoyenPaiement moyenPaiement;
 
 	/**
 	 * Prestation de service ou vente de marchandise.
 	 */
 	@Column(name = "v_nature")
-	private NatureAchatVenteType nature;
+	private NatureVenteType nature;
 
 	@Id
 	@GeneratedValue
@@ -80,7 +80,7 @@ public abstract class Vente {
 	/**
 	 * @return the nature
 	 */
-	public NatureAchatVenteType getNature() {
+	public NatureVenteType getNature() {
 		return nature;
 	}
 
@@ -122,7 +122,7 @@ public abstract class Vente {
 	/**
 	 * @param nature the nature to set
 	 */
-	public void setNature(NatureAchatVenteType nature) {
+	public void setNature(NatureVenteType nature) {
 		this.nature = nature;
 	}
 
