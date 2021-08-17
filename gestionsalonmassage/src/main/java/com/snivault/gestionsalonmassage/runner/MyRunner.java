@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.snivault.gestionsalonmassage.controllers.ClientController;
-import com.snivault.gestionsalonmassage.controllers.VenteController;
+import com.snivault.gestionsalonmassage.controller.ClientController;
+import com.snivault.gestionsalonmassage.controller.VenteController;
 import com.snivault.gestionsalonmassage.dao.ClientDao;
 import com.snivault.gestionsalonmassage.model.Client;
 

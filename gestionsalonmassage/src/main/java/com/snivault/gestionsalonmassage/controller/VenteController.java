@@ -1,4 +1,4 @@
-package com.snivault.gestionsalonmassage.controllers;
+package com.snivault.gestionsalonmassage.controller;
 
 import java.util.List;
 
