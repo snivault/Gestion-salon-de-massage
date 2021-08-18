@@ -32,7 +32,7 @@ public abstract class Vente {
 	private Date dateVente;
 
 	@Column(name = "v_montant_encaisse")
-	private float montantEncaisse;
+	private Float montantEncaisse;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "va_moyen_paiement_id")
@@ -47,7 +47,7 @@ public abstract class Vente {
 	@Id
 	@GeneratedValue
 	@Column(name = "v_vente_id")
-	private int venteId;
+	private Integer venteId;
 
 	/**
 	 * @return the client
@@ -66,7 +66,7 @@ public abstract class Vente {
 	/**
 	 * @return the montantEncaisse
 	 */
-	public float getMontantEncaisse() {
+	public Float getMontantEncaisse() {
 		return montantEncaisse;
 	}
 
@@ -87,7 +87,7 @@ public abstract class Vente {
 	/**
 	 * @return the venteId
 	 */
-	public int getVenteId() {
+	public Integer getVenteId() {
 		return venteId;
 	}
 
@@ -108,7 +108,7 @@ public abstract class Vente {
 	/**
 	 * @param montantEncaisse the montantEncaisse to set
 	 */
-	public void setMontantEncaisse(float montantEncaisse) {
+	public void setMontantEncaisse(Float montantEncaisse) {
 		this.montantEncaisse = montantEncaisse;
 	}
 
@@ -129,7 +129,7 @@ public abstract class Vente {
 	/**
 	 * @param venteId the venteId to set
 	 */
-	public void setVenteId(int venteId) {
+	public void setVenteId(Integer venteId) {
 		this.venteId = venteId;
 	}
 }

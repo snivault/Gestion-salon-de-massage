@@ -37,7 +37,7 @@ public class Client {
 	@Id
 	@GeneratedValue
 	@Column(name = "c_client_id")
-	private int clientId;
+	private Integer clientId;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "c_client_problematique", joinColumns = @JoinColumn(name = "c_client_id"), inverseJoinColumns = @JoinColumn(name = "c_problematique_id"))
@@ -60,7 +60,7 @@ public class Client {
 	private String pseudoFacebook;
 
 	@Column(name = "c_telephone")
-	private int telephone;
+	private Integer telephone;
 
 	/**
 	 * @return the adresse
@@ -79,7 +79,7 @@ public class Client {
 	/**
 	 * @return the clientId
 	 */
-	public int getClientId() {
+	public Integer getClientId() {
 		return clientId;
 	}
 
@@ -128,7 +128,7 @@ public class Client {
 	/**
 	 * @return the telephone
 	 */
-	public int getTelephone() {
+	public Integer getTelephone() {
 		return telephone;
 	}
 
@@ -149,7 +149,7 @@ public class Client {
 	/**
 	 * @param clientId the clientId to set
 	 */
-	public void setClientId(int clientId) {
+	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
 	}
 
@@ -198,7 +198,7 @@ public class Client {
 	/**
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(int telephone) {
+	public void setTelephone(Integer telephone) {
 		this.telephone = telephone;
 	}
 

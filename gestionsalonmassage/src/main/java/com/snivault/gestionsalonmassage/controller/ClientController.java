@@ -7,7 +7,9 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.snivault.gestionsalonmassage.dao.CarteFideliteDao;
 import com.snivault.gestionsalonmassage.dao.ClientDao;
@@ -20,7 +22,8 @@ import com.snivault.gestionsalonmassage.model.CarteFidelite;
 import com.snivault.gestionsalonmassage.model.CaseCocheeFidelite;
 import com.snivault.gestionsalonmassage.model.Client;
 
-@Controller
+@RestController
+@RequestMapping("clients")
 public class ClientController {
 
 	@Autowired
@@ -56,6 +59,11 @@ public class ClientController {
 		} else {
 			return null;
 		}
+	}
+
+	@GetMapping
+	public List<Client> getClients() {
+		return clientDao.findAll();
 	}
 
 	/**

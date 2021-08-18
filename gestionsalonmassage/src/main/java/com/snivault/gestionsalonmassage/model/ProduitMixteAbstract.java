@@ -29,12 +29,12 @@ public abstract class ProduitMixteAbstract {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "m_produit_id")
-	private int produitMixteId;
+	private Integer produitMixteId;
 
 	/**
 	 * @return the produitMixteId
 	 */
-	public int getProduitMixteId() {
+	public Integer getProduitMixteId() {
 		return produitMixteId;
 	}
 
@@ -44,7 +44,7 @@ public abstract class ProduitMixteAbstract {
 	/**
 	 * @param produitMixteId the produitMixteId to set
 	 */
-	public void setProduitMixteId(int produitMixteId) {
+	public void setProduitMixteId(Integer produitMixteId) {
 		this.produitMixteId = produitMixteId;
 	}
 

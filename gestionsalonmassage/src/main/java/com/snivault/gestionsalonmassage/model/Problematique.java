@@ -21,7 +21,7 @@ public class Problematique {
 	@Id
 	@GeneratedValue
 	@Column(name = "c_problematique_id")
-	private int problematiqueId;
+	private Integer problematiqueId;
 
 	/**
 	 * @return the libelle
@@ -33,7 +33,7 @@ public class Problematique {
 	/**
 	 * @return the problematiqueId
 	 */
-	public int getProblematiqueId() {
+	public Integer getProblematiqueId() {
 		return problematiqueId;
 	}
 
@@ -47,7 +47,7 @@ public class Problematique {
 	/**
 	 * @param problematiqueId the problematiqueId to set
 	 */
-	public void setProblematiqueId(int problematiqueId) {
+	public void setProblematiqueId(Integer problematiqueId) {
 		this.problematiqueId = problematiqueId;
 	}
 }

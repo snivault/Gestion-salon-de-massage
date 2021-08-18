@@ -1,5 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
+import reactjs, { useState, useEffect } from "react";
+
+const Clients = () => {
+  const fetchClients = () => {
+    axios.get("http://localhost:8081/clients").then(res => {
+      console.log(res);
+    }
+    );
+  }
+
+  useEffect(() => {fetchClients();},[])
+
+  return <h1>Hello</h1>;
+}
 
 function App() {
   return (
@@ -18,6 +33,7 @@ function App() {
           Hello Gestion salon de massage
         </a>
       </header>
+      <body><Clients></Clients></body>
     </div>
   );
 }

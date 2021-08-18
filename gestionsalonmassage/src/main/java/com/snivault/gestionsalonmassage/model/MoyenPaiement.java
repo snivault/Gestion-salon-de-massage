@@ -21,7 +21,7 @@ public class MoyenPaiement {
 	@Id
 	@GeneratedValue
 	@Column(name = "va_moyen_paiement_id")
-	private int moyenPaiementId;
+	private Integer moyenPaiementId;
 
 	/**
 	 * @return the libelle
@@ -33,7 +33,7 @@ public class MoyenPaiement {
 	/**
 	 * @return the moyenPaiementId
 	 */
-	public int getMoyenPaiementId() {
+	public Integer getMoyenPaiementId() {
 		return moyenPaiementId;
 	}
 
@@ -47,7 +47,7 @@ public class MoyenPaiement {
 	/**
 	 * @param moyenPaiementId the moyenPaiementId to set
 	 */
-	public void setMoyenPaiementId(int moyenPaiementId) {
+	public void setMoyenPaiementId(Integer moyenPaiementId) {
 		this.moyenPaiementId = moyenPaiementId;
 	}
 }

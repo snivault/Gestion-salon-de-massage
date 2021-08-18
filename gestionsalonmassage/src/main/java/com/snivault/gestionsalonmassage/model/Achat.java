@@ -31,7 +31,7 @@ public class Achat {
 	@Id
 	@GeneratedValue
 	@Column(name = "m_achat_id")
-	private int achatId;
+	private Integer achatId;
 
 	@Column(name = "m_date_achat")
 	private Date dateAchat;
@@ -52,7 +52,7 @@ public class Achat {
 	/**
 	 * @return the achatId
 	 */
-	public int getAchatId() {
+	public Integer getAchatId() {
 		return achatId;
 	}
 
@@ -94,7 +94,7 @@ public class Achat {
 	/**
 	 * @param achatId the achatId to set
 	 */
-	public void setAchatId(int achatId) {
+	public void setAchatId(Integer achatId) {
 		this.achatId = achatId;
 	}
 

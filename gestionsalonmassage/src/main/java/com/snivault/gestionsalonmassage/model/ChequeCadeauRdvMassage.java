@@ -23,7 +23,7 @@ public class ChequeCadeauRdvMassage {
 	@Id
 	@GeneratedValue
 	@Column(name = "v_cheque_cadeau_rdv_massage_id")
-	private int chequeCadeauRdvMassageId;
+	private Integer chequeCadeauRdvMassageId;
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "v_rendez_vous_massage_id")
 	private RendezVousMassage rendezVousMassage;
@@ -38,7 +38,7 @@ public class ChequeCadeauRdvMassage {
 	/**
 	 * @return the chequeCadeauRdvMassageId
 	 */
-	public int getChequeCadeauRdvMassageId() {
+	public Integer getChequeCadeauRdvMassageId() {
 		return chequeCadeauRdvMassageId;
 	}
 
@@ -59,7 +59,7 @@ public class ChequeCadeauRdvMassage {
 	/**
 	 * @param chequeCadeauRdvMassageId the chequeCadeauRdvMassageId to set
 	 */
-	public void setChequeCadeauRdvMassageId(int chequeCadeauRdvMassageId) {
+	public void setChequeCadeauRdvMassageId(Integer chequeCadeauRdvMassageId) {
 		this.chequeCadeauRdvMassageId = chequeCadeauRdvMassageId;
 	}
 

@@ -28,7 +28,7 @@ public class CaseCocheeFidelite {
 	@Id
 	@GeneratedValue
 	@Column(name = "v_case_cochee_fidelite_id")
-	private int caseCocheeFideliteId;
+	private Integer caseCocheeFideliteId;
 	/**
 	 * La case a été cochée suite soit à un rendez-vous de massage, soit à un achat
 	 * de chèque cadeau.
@@ -66,7 +66,7 @@ public class CaseCocheeFidelite {
 	/**
 	 * @return the caseCocheeFideliteId
 	 */
-	public int getCaseCocheeFideliteId() {
+	public Integer getCaseCocheeFideliteId() {
 		return caseCocheeFideliteId;
 	}
 
@@ -115,7 +115,7 @@ public class CaseCocheeFidelite {
 	/**
 	 * @param caseCocheeFideliteId the caseCocheeFideliteId to set
 	 */
-	public void setCaseCocheeFideliteId(int caseCocheeId) {
+	public void setCaseCocheeFideliteId(Integer caseCocheeId) {
 		this.caseCocheeFideliteId = caseCocheeId;
 	}
 

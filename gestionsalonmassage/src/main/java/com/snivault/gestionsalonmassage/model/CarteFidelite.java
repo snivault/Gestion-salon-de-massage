@@ -26,7 +26,7 @@ public class CarteFidelite {
 	@Id
 	@GeneratedValue
 	@Column(name = "v_carte_fidelite_id")
-	private int carteFideliteId;
+	private Integer carteFideliteId;
 
 	/**
 	 * par défaut les OneToMany sont LAZY mais c'est juste pour que je m'en
@@ -42,7 +42,7 @@ public class CarteFidelite {
 	/**
 	 * @return the carteFideliteId
 	 */
-	public int getCarteFideliteId() {
+	public Integer getCarteFideliteId() {
 		return carteFideliteId;
 	}
 
@@ -56,7 +56,7 @@ public class CarteFidelite {
 	/**
 	 * @param carteFideliteId the carteFideliteId to set
 	 */
-	public void setCarteFideliteId(int carteFideliteId) {
+	public void setCarteFideliteId(Integer carteFideliteId) {
 		this.carteFideliteId = carteFideliteId;
 	}
 

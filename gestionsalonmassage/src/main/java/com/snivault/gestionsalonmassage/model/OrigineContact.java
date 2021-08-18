@@ -21,7 +21,7 @@ public class OrigineContact {
 	@Id
 	@GeneratedValue
 	@Column(name = "c_origine_contact_id")
-	private int origineContactId;
+	private Integer origineContactId;
 
 	/**
 	 * @return the libelle
@@ -33,7 +33,7 @@ public class OrigineContact {
 	/**
 	 * @return the origineContactId
 	 */
-	public int getOrigineContactId() {
+	public Integer getOrigineContactId() {
 		return origineContactId;
 	}
 
@@ -47,7 +47,7 @@ public class OrigineContact {
 	/**
 	 * @param origineContactId the origineContactId to set
 	 */
-	public void setOrigineContactId(int origineContactId) {
+	public void setOrigineContactId(Integer origineContactId) {
 		this.origineContactId = origineContactId;
 	}
 }

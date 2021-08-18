@@ -28,7 +28,7 @@ public class Bienfait {
 	@Id
 	@GeneratedValue
 	@Column(name = "m_bienfait_id")
-	private int bienfaitId;
+	private Integer bienfaitId;
 
 	@Column(name = "m_libelle")
 	private String libelle;
@@ -40,7 +40,7 @@ public class Bienfait {
 	/**
 	 * @return the bienfaitId
 	 */
-	public int getBienfaitId() {
+	public Integer getBienfaitId() {
 		return bienfaitId;
 	}
 
@@ -61,7 +61,7 @@ public class Bienfait {
 	/**
 	 * @param bienfaitId the bienfaitId to set
 	 */
-	public void setBienfaitId(int bienfaitId) {
+	public void setBienfaitId(Integer bienfaitId) {
 		this.bienfaitId = bienfaitId;
 	}
 

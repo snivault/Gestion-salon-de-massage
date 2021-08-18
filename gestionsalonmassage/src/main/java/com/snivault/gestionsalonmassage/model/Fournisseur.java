@@ -21,7 +21,7 @@ public class Fournisseur {
 	@Id
 	@GeneratedValue
 	@Column(name = "m_fournisseur_id")
-	private int fournisseurId;
+	private Integer fournisseurId;
 
 	@Column(name = "m_mail")
 	private String mail;
@@ -29,11 +29,11 @@ public class Fournisseur {
 	@Column(name = "m_nom")
 	private String nom;
 
-	@Column(name = "m_site_internet")
+	@Column(name = "m_site_Integerernet")
 	private String siteInternet;
 
 	@Column(name = "m_telephone")
-	private int telephone;
+	private Integer telephone;
 
 	/**
 	 * @return the adresse
@@ -45,7 +45,7 @@ public class Fournisseur {
 	/**
 	 * @return the fournisseurId
 	 */
-	public int getFournisseurId() {
+	public Integer getFournisseurId() {
 		return fournisseurId;
 	}
 
@@ -73,7 +73,7 @@ public class Fournisseur {
 	/**
 	 * @return the telephone
 	 */
-	public int getTelephone() {
+	public Integer getTelephone() {
 		return telephone;
 	}
 
@@ -87,7 +87,7 @@ public class Fournisseur {
 	/**
 	 * @param fournisseurId the fournisseurId to set
 	 */
-	public void setFournisseurId(int fournisseurId) {
+	public void setFournisseurId(Integer fournisseurId) {
 		this.fournisseurId = fournisseurId;
 	}
 
@@ -115,7 +115,7 @@ public class Fournisseur {
 	/**
 	 * @param telephone the telephone to set
 	 */
-	public void setTelephone(int telephone) {
+	public void setTelephone(Integer telephone) {
 		this.telephone = telephone;
 	}
 

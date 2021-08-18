@@ -43,7 +43,7 @@ public class Massage extends ProduitMixteAbstract {
 	private List<Bienfait> listBienfaits;
 
 	@Column(name = "m_tarif_prevu")
-	private float tarifPrevu;
+	private Float tarifPrevu;
 
 	/**
 	 * @return the dureePrevue
@@ -76,7 +76,7 @@ public class Massage extends ProduitMixteAbstract {
 	/**
 	 * @return the tarifPrevu
 	 */
-	public float getTarifPrevu() {
+	public Float getTarifPrevu() {
 		return tarifPrevu;
 	}
 
@@ -118,7 +118,7 @@ public class Massage extends ProduitMixteAbstract {
 	/**
 	 * @param tarifPrevu the tarifPrevu to set
 	 */
-	public void setTarifPrevu(float tarifPrevu) {
+	public void setTarifPrevu(Float tarifPrevu) {
 		this.tarifPrevu = tarifPrevu;
 	}
 }

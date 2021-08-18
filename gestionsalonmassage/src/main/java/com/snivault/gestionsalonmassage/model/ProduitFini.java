@@ -38,7 +38,7 @@ public class ProduitFini extends ProduitMixteAbstract {
 	private String reference;
 
 	@Column(name = "m_tarif")
-	private String tarif;
+	private Float tarif;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "v_ventes_produits_finis", joinColumns = @JoinColumn(name = "m_produit_fini_id"), inverseJoinColumns = @JoinColumn(name = "v_vente_id"))
@@ -61,7 +61,7 @@ public class ProduitFini extends ProduitMixteAbstract {
 	/**
 	 * @return the tarif
 	 */
-	public String getTarif() {
+	public Float getTarif() {
 		return tarif;
 	}
 
@@ -88,7 +88,7 @@ public class ProduitFini extends ProduitMixteAbstract {
 	/**
 	 * @param tarif the tarif to set
 	 */
-	public void setTarif(String tarif) {
+	public void setTarif(Float tarif) {
 		this.tarif = tarif;
 	}
 
