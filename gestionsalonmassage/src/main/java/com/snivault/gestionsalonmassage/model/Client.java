@@ -14,8 +14,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * Classe représentant un client du salon de massage.
@@ -26,18 +28,23 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "c_client")
 @NamedEntityGraph(name = "client.listproblematiques", attributeNodes = @NamedAttributeNode("listProblematiques"))
+@NamedEntityGraph(name = "client.listcasecochee", attributeNodes = @NamedAttributeNode("listCaseCochees"))
 public class Client {
 	@Column(name = "c_adresse")
 	private String adresse;
-
-	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "v_carte_fidelite_id")
-	private CarteFidelite carteFidelite;
 
 	@Id
 	@GeneratedValue
 	@Column(name = "c_client_id")
 	private Integer clientId;
+
+	/**
+	 * par défaut les OneToMany sont LAZY mais c'est juste pour que je m'en
+	 * souvienne.
+	 */
+	@JsonIgnore
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
+	private List<CaseCocheeFidelite> listCaseCochees;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "c_client_problematique", joinColumns = @JoinColumn(name = "c_client_id"), inverseJoinColumns = @JoinColumn(name = "c_problematique_id"))
@@ -70,17 +77,17 @@ public class Client {
 	}
 
 	/**
-	 * @return the carteFidelite
-	 */
-	public CarteFidelite getCarteFidelite() {
-		return carteFidelite;
-	}
-
-	/**
 	 * @return the clientId
 	 */
 	public Integer getClientId() {
 		return clientId;
+	}
+
+	/**
+	 * @return the listCaseCochees
+	 */
+	public List<CaseCocheeFidelite> getListCaseCochees() {
+		return listCaseCochees;
 	}
 
 	/**
@@ -102,6 +109,17 @@ public class Client {
 	 */
 	public String getNom() {
 		return nom;
+	}
+
+	public String getNomPrenom() {
+		if (!getNom().isEmpty() && !getPrenom().isEmpty()) {
+			return new StringBuilder(Math.addExact(getNom().length(), getPrenom().length())).append(getNom()).append(" ").append(getPrenom()).toString();
+		} else if (!getNom().isEmpty() && !getPrenom().isEmpty()) {
+			return getNom();
+		} else if (!getPrenom().isEmpty()) {
+			return getPrenom();
+		}
+		return "";
 	}
 
 	/**
@@ -140,17 +158,17 @@ public class Client {
 	}
 
 	/**
-	 * @param carteFidelite the carteFidelite to set
-	 */
-	public void setCarteFidelite(CarteFidelite carteFidelite) {
-		this.carteFidelite = carteFidelite;
-	}
-
-	/**
 	 * @param clientId the clientId to set
 	 */
 	public void setClientId(Integer clientId) {
 		this.clientId = clientId;
+	}
+
+	/**
+	 * @param listCaseCochees the listCaseCochees to set
+	 */
+	public void setListCaseCochees(List<CaseCocheeFidelite> listCaseCochees) {
+		this.listCaseCochees = listCaseCochees;
 	}
 
 	/**

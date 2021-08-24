@@ -4,10 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
-import com.snivault.gestionsalonmassage.model.CarteFidelite;
 import com.snivault.gestionsalonmassage.model.CaseCocheeFidelite;
 
-public interface CaseCocheeFideliteDao extends JpaRepository<CarteFidelite, Integer> {
+public interface CaseCocheeFideliteDao extends JpaRepository<CaseCocheeFidelite, Integer> {
 
 	@Query("SELECT cas2 FROM CaseCocheeFidelite cas2 WHERE cas2.chequeCadeau.venteId=:chequeCadeauId")
 	CaseCocheeFidelite getCaseByVenteChequeCadeauId(@Param(value = "chequeCadeauId") int chequeCadeauId);

@@ -1,0 +1,24 @@
+#logo-site {
+	position: relative;
+    width: 30%;
+    text-align: left;
+    margin-left:5px;
+}
+
+#logo-site img
+{
+    height: 100px;
+    padding-left: 5%;
+}
+
+#texte-logo-site {
+	position: absolute;
+	top: 70px;
+	left: 10px;
+	text-align: center;	
+    z-index: 200;
+	text-transform: uppercase;
+	color: #806fac;
+	font-weight: bold;
+	font-size:1em;
+}

@@ -14,13 +14,6 @@ import com.snivault.gestionsalonmassage.model.Problematique;
  *
  */
 public interface ClientService {
-	/**
-	 * Ajouter une carte de fidélité (elle est vide, c'est juste pour attribuer un
-	 * n° en base).
-	 * 
-	 * @param client à modifier.
-	 */
-	void ajouterCarteFidelite(Client client);
 
 	/**
 	 * Ajouter une ou plusieurs problématiques à un client.
@@ -31,7 +24,7 @@ public interface ClientService {
 	void ajouterProblematiques(Client client, List<Problematique> listProblematiques);
 
 	/**
-	 * Renvoyer la dernière case cochée de la carte de fidélité.
+	 * Renvoyer la dernière case cochée de fidélité.
 	 * 
 	 * @param clientId le client recherché.
 	 * @return case cochée.

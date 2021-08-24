@@ -7,33 +7,36 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.snivault.gestionsalonmassage.dao.CarteFideliteDao;
 import com.snivault.gestionsalonmassage.dao.ClientDao;
 import com.snivault.gestionsalonmassage.dao.MassageDao;
 import com.snivault.gestionsalonmassage.dao.ViewMassageAdapteDao;
 import com.snivault.gestionsalonmassage.dao.service.ClientService;
 import com.snivault.gestionsalonmassage.dao.service.ClientServiceImpl;
 import com.snivault.gestionsalonmassage.enums.DroitFideliteType;
-import com.snivault.gestionsalonmassage.model.CarteFidelite;
 import com.snivault.gestionsalonmassage.model.CaseCocheeFidelite;
 import com.snivault.gestionsalonmassage.model.Client;
 
+/**
+ * Controleur pour les clients. C'est celui-ci qui fait le lien avec les pages
+ * HTML. CrossOrigin indique quel domaine et port on accepte puisque le backend
+ * tourne sur un port (ex : 8081) différent de celui du front (ex : 3000).
+ */
 @RestController
 @RequestMapping("clients")
+@CrossOrigin("*")
 public class ClientController {
 
 	@Autowired
-	private CarteFideliteDao carteFideliteDao;
+	private ClientDao clientDao;
 
 	@Autowired
-	ClientDao clientDao;
+	private ClientService clientService;
 
-	@Autowired
-	ClientService clientService;
 	@Autowired
 	private MassageDao massageDao;
 
@@ -46,9 +49,8 @@ public class ClientController {
 	 * @return la chaîne de caractères concernant les droits de fidélité.
 	 */
 	public DroitFideliteType consulterDroitsFidelites(Client client) {
-		CarteFidelite carteFidelite = carteFideliteDao.getById(client.getCarteFidelite().getCarteFideliteId());
-		if (null != client && null != carteFidelite) {
-			List<CaseCocheeFidelite> listCases = carteFidelite.getListCaseCochees();
+		List<CaseCocheeFidelite> listCases = client.getListCaseCochees();
+		if (null != client && !listCases.isEmpty()) {
 			for (DroitFideliteType droit : DroitFideliteType.getMapNbVentes().keySet()) {
 				if (listCases.size() == droit.getNbVentes()) {
 					return droit;

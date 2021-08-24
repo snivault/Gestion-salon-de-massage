@@ -1,12 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
+import PageEntiere from './component/PageEntiere';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <div>
+      <PageEntiere />
+    </div>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

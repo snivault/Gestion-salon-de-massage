@@ -1,5 +1,7 @@
 package com.snivault.gestionsalonmassage.dao;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,9 @@ public interface ClientDao extends JpaRepository<Client, Integer> {
 
 	@Override
 	@EntityGraph(value = "client.listproblematiques")
+	List<Client> findAll();
+
+	@Override
 	Client getById(Integer clientId);
 
 }

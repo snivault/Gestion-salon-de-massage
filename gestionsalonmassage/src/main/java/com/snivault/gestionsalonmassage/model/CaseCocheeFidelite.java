@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * Case cochée d'une carte de fidélité propre à un client.
+ * Case cochée de la carte de fidélité propre à un client.
  * 
  * @author Nous
  *
@@ -21,14 +21,11 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "v_case_cochee_fidelite")
 public class CaseCocheeFidelite {
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "v_carte_fidelite_id")
-	private CarteFidelite carteFidelite;
-
 	@Id
 	@GeneratedValue
 	@Column(name = "v_case_cochee_fidelite_id")
 	private Integer caseCocheeFideliteId;
+
 	/**
 	 * La case a été cochée suite soit à un rendez-vous de massage, soit à un achat
 	 * de chèque cadeau.
@@ -36,6 +33,10 @@ public class CaseCocheeFidelite {
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "v_vente_cheque_cadeau_id")
 	private ChequeCadeau chequeCadeau;
+
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "c_client_id")
+	private Client client;
 
 	@Column(name = "c_date_cadeau")
 	private Date dateCadeau;
@@ -57,13 +58,6 @@ public class CaseCocheeFidelite {
 	private RendezVousMassage rendezVousMassage;
 
 	/**
-	 * @return the carteFidelite
-	 */
-	public CarteFidelite getCarteFidelite() {
-		return carteFidelite;
-	}
-
-	/**
 	 * @return the caseCocheeFideliteId
 	 */
 	public Integer getCaseCocheeFideliteId() {
@@ -75,6 +69,13 @@ public class CaseCocheeFidelite {
 	 */
 	public ChequeCadeau getChequeCadeau() {
 		return chequeCadeau;
+	}
+
+	/**
+	 * @return the client
+	 */
+	public Client getClient() {
+		return client;
 	}
 
 	/**
@@ -106,13 +107,6 @@ public class CaseCocheeFidelite {
 	}
 
 	/**
-	 * @param carteFidelite the carteFidelite to set
-	 */
-	public void setCarteFidelite(CarteFidelite carteFidelite) {
-		this.carteFidelite = carteFidelite;
-	}
-
-	/**
 	 * @param caseCocheeFideliteId the caseCocheeFideliteId to set
 	 */
 	public void setCaseCocheeFideliteId(Integer caseCocheeId) {
@@ -124,6 +118,13 @@ public class CaseCocheeFidelite {
 	 */
 	public void setChequeCadeau(ChequeCadeau chequeCadeau) {
 		this.chequeCadeau = chequeCadeau;
+	}
+
+	/**
+	 * @param client the client to set
+	 */
+	public void setClient(Client client) {
+		this.client = client;
 	}
 
 	/**

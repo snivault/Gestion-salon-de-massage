@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.util.ListUtils;
 
-import com.snivault.gestionsalonmassage.dao.CarteFideliteDao;
 import com.snivault.gestionsalonmassage.dao.CaseCocheeFideliteDao;
 import com.snivault.gestionsalonmassage.dao.ChequeCadeauDao;
 import com.snivault.gestionsalonmassage.dao.ClientDao;
 import com.snivault.gestionsalonmassage.dao.RendezVousMassageDao;
-import com.snivault.gestionsalonmassage.model.CarteFidelite;
 import com.snivault.gestionsalonmassage.model.CaseCocheeFidelite;
 import com.snivault.gestionsalonmassage.model.ChequeCadeau;
 import com.snivault.gestionsalonmassage.model.Client;
@@ -31,9 +29,6 @@ public class ClientServiceImpl implements ClientService {
 	public static final String ERR_CLIENT_NULL = "L'objet Client ne doit pas être null";
 
 	@Autowired
-	private CarteFideliteDao carteFideliteDao;
-
-	@Autowired
 	private CaseCocheeFideliteDao caseCocheeFideliteDao;
 
 	@Autowired
@@ -44,19 +39,6 @@ public class ClientServiceImpl implements ClientService {
 
 	@Autowired
 	private RendezVousMassageDao rendezVousMassageDao;
-
-	@Override
-	public void ajouterCarteFidelite(Client client) throws IllegalArgumentException {
-		if (null != client) {
-			CarteFidelite carteFidelite = new CarteFidelite();
-			client.setCarteFidelite(carteFidelite);
-			clientDao.save(client);
-			carteFideliteDao.save(carteFidelite);
-
-		} else {
-			throw new IllegalArgumentException(ERR_CLIENT_NULL);
-		}
-	}
 
 	@Override
 	public void ajouterProblematiques(Client client, List<Problematique> listProblematiques) {
