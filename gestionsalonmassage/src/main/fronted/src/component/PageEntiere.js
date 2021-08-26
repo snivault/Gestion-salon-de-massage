@@ -18,7 +18,7 @@ class PageEntiere extends React.Component {
 	render() {
 		return(
 			<div>
-				<nav class="menu">
+				<nav className="menu">
 					<ul>
 						<li><BoutonNav 
 							value="Client" onClick={() => this.handleClick("Client")} /></li>

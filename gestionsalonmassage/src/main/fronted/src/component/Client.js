@@ -1,5 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
+
+const wait = function (duration = 1000) {
+	return new Promise((resolve) => {
+		window.setTimeout(resolve, duration);
+	})
+}
 
 function Clients() {
 	const [clients, setClients] = useState([]);
@@ -13,37 +20,99 @@ function Clients() {
 		);
 	}
 
+	/* Tuto de ReactJS : Si vous voulez exécuter un effet et le nettoyer une seule fois (au montage puis au démontage), vous pouvez passer un tableau vide ([]) comme second argument. 
+	* Ça indique à React que votre effet ne dépend d’aucune valeur issue des props ou de l’état local, donc il n’a jamais besoin d’être ré-exécuté. */
 	useEffect(() => { fetchClients(); }, [])
+
+	// Hook form
+	const form = useForm();
+	const  { handleSubmit } = form;
+
+	// handler
+	const onSubmit = async data => {
+		await wait(2000)
+		console.log(data)
+	};
 
 	return (
 		<div><h1>Clients</h1>
-			<table>
-				<ClientTableHeader />
-				{clients.map((client, index) => {
-					return (<tbody><tr>
-						<td>{client.clientId}</td>
-						<td>{client.nom}</td>
-						<td>{client.prenom}</td>
-						<td>{client.adresse}</td>
-						<td>{client.telephone}</td>
-						<td>{client.mail}</td>
-						<td>{client.pseudoFacebook}</td>
-						<td>{(client.origineContact) ? client.origineContact.libelle : ''}</td>
-						<td><ProblematiquesClient client={client} /></td>
-						<ClientActions />
-					</tr></tbody>);
-				})}
-			</table></div>);
+			<form onSubmit={handleSubmit(onSubmit)}>
+				<table>
+					<ClientTableHeader />
+					{clients.map((client, index) => {
+						return (
+							<tbody key={"tbody".concat(client.clientId)} >
+								<Client dataClient={client} modifiable={true} form={form} />
+							</tbody>);
+					})}
+				</table>
+			</form>
+		</div>);
 };
+
+function Client(props) {
+	let [dataClient, setDataClient] = useState(props.dataClient);
+	const  { register, handleSubmit, formState, errors } = props.form;
+
+	//defaultValue={dataClient.nom}
+	// defaultValue={dataClient.prenom}
+	// defaultValue={dataClient.adresse}
+	// defaultValue={dataClient.telephone}
+	// defaultValue={dataClient.mail}
+
+	if (props.modifiable) {
+		return (<tr>
+			<td>{props.dataClient.clientId}</td>
+			<td>
+				<input type="text" className="form-control is-invalid" defaultValue={props.dataClient.nom} id={"nomClient".concat(props.dataClient.clientId)}
+				key={"nomClient".concat(props.dataClient.clientId)}
+			 		{...register("nomClient".concat(props.dataClient.clientId), { required: "Vous devez saisir un nom de client.", })}>
+			</input></td>
+			<td><input type="text" className="form-control is-invalid"  defaultValue={props.dataClient.prenom} id={"prenomClient".concat(props.dataClient.clientId)} 
+				{...register("prenomClient".concat(props.dataClient.clientId), { required: "Vous devez saisir un prénom de client.", })}>
+			</input></td>
+			<td><input type="text" className="form-control" defaultValue={props.dataClient.adresse} id={"adresseClient".concat(props.dataClient.clientId)} 
+				{...register("adresseClient".concat(props.dataClient.clientId), {})}>
+			</input></td>
+			<td><input type="text" className="form-control" defaultValue={props.dataClient.telephone} id={"adresseClient".concat(props.dataClient.clientId)} 
+				{...register("telephoneClient".concat(props.dataClient.clientId), {})}>
+			</input></td>
+			<td><input type="text" className="form-control" defaultValue={props.dataClient.mail} id={"mailClient".concat(props.dataClient.clientId)} 
+				{...register("mailClient".concat(props.dataClient.clientId), { required: "Required:false", })}>
+			</input></td>
+			<td><input type="text" className="form-control" defaultValue={props.dataClient.pseudoFacebook} id={"pseudoFacebook".concat(props.dataClient.clientId)} 
+				{...register("pseudoFacebookClient".concat(props.dataClient.clientId), {})}>
+			</input></td>
+			<td>{(dataClient.origineContact) ? dataClient.origineContact.libelle : ''}</td>
+			<td><ProblematiquesClient client={dataClient} />
+			</td>
+			<ClientActions />
+		</tr>
+		);
+	} else {
+		return (<tr>
+			<td>{props.dataClient.clientId}</td>
+			<td>{props.dataClient.nom}</td>
+			<td>{props.dataClient.prenom}</td>
+			<td>{props.dataClient.adresse}</td>
+			<td>{props.dataClient.telephone}</td>
+			<td>{props.dataClient.mail}</td>
+			<td>{props.dataClient.pseudoFacebook}</td>
+			<td>{(props.dataClient.origineContact) ? props.dataClient.origineContact.libelle : ''}</td>
+			<td><ProblematiquesClient client={props.dataClient} />
+			</td>
+			<ClientActions />
+		</tr>
+		);
+	}
+}
 
 function ProblematiquesClient(props) {
 	return (
-		<textarea disabled>
-			{
+		<textarea disabled defaultValue={
 				props.client.listProblematiques.map((prob, index) => {
 					return (prob.libelle);
-				}).join(",")}
-		</textarea>);
+				}).join(",")} />);
 
 }
 
@@ -81,8 +150,8 @@ function ClientActions() {
 	}
 
 	return (
-		<div>
-			<button type="button" onClick={changerModifierEnregistrer}>{btnModifierEnregistrer}</button>
+		<td>
+			<button type="submit" onClick={changerModifierEnregistrer}>{btnModifierEnregistrer}</button>
 			<button type="button">Supprimer</button>
 			<button type="button">Détails Fidélité</button>
 			<button type="button" onClick={afficherChoixVente}>Nouvelle vente</button>
@@ -91,7 +160,7 @@ function ClientActions() {
 				<option value="ChequeCadeau">Chèque cadeau</option>
 				<option value="Produit">Produit</option>
 			</select>
-		</div>
+		</td>
 
 	);
 }
