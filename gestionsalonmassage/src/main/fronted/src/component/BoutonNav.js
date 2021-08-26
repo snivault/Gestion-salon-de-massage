@@ -1,7 +1,7 @@
 function BoutonNav (props)  {
 
 	return (
-		<a href="#" onClick={props.onClick}>{props.value}</a>
+		<a href={props.value} onClick={props.onClick}>{props.value}</a>
 	);
 	
 }

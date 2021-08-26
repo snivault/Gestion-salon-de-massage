@@ -1,5 +1,7 @@
 package com.snivault.gestionsalonmassage.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "c_problematique")
-public class Problematique {
+public class Problematique implements Serializable {
+	/** Generated id. */
+	private static final long serialVersionUID = 731080168778390429L;
+
 	@Column(name = "c_libelle")
 	private String libelle;
 

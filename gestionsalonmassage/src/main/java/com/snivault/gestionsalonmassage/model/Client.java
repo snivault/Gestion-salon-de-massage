@@ -1,5 +1,6 @@
 package com.snivault.gestionsalonmassage.model;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -29,7 +30,11 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "c_client")
 @NamedEntityGraph(name = "client.listproblematiques", attributeNodes = @NamedAttributeNode("listProblematiques"))
 @NamedEntityGraph(name = "client.listcasecochee", attributeNodes = @NamedAttributeNode("listCaseCochees"))
-public class Client {
+public class Client implements Serializable {
+
+	/** Generated id. */
+	private static final long serialVersionUID = -2809720185693987287L;
+
 	@Column(name = "c_adresse")
 	private String adresse;
 
