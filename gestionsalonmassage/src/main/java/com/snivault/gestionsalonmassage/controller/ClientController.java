@@ -1,5 +1,7 @@
 package com.snivault.gestionsalonmassage.controller;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -7,8 +9,14 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,7 +35,7 @@ import com.snivault.gestionsalonmassage.model.Client;
  * tourne sur un port (ex : 8081) différent de celui du front (ex : 3000).
  */
 @RestController
-@RequestMapping("clients")
+@RequestMapping("api/v1/client")
 @CrossOrigin("*")
 public class ClientController {
 
@@ -39,6 +47,12 @@ public class ClientController {
 
 	@Autowired
 	private MassageDao massageDao;
+
+	@PostMapping
+	public ResponseEntity<Client> ajouterClient(@PathVariable Client client) throws URISyntaxException {
+		Client sauvClient = clientDao.save(client);
+		return ResponseEntity.created(new URI("/Clients/".concat(String.valueOf(sauvClient.getClientId())))).body(sauvClient);
+	}
 
 	/**
 	 * Consulter les droits de fidélité d'un client. La fonction retourne une chaîne
@@ -68,6 +82,15 @@ public class ClientController {
 		return clientDao.findAll();
 	}
 
+	@PutMapping("/{clientId}")
+	public ResponseEntity<Client> modifierClient(@PathVariable Integer clientId, @RequestBody Client client) throws CloneNotSupportedException {
+		Client clientAModifier = clientDao.findById(clientId).orElseThrow(RuntimeException::new);
+		System.out.println(client.getTelephone());
+		clientAModifier = client.clone();
+		clientDao.save(clientAModifier);
+		return ResponseEntity.ok(clientAModifier);
+	}
+
 	/**
 	 * Proposer les massages les plus adaptés triés par ordre du plus adapté au
 	 * moins adapté. Le dernier a quand même au moins une problématique à laquelle
@@ -86,6 +109,16 @@ public class ClientController {
 		}
 
 		return mapMassages.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+	}
+
+	/**
+	 * @param entity
+	 * @see org.springframework.data.repository.CrudRepository#delete(java.lang.Object)
+	 */
+	@DeleteMapping("/{clientId}")
+	public ResponseEntity<Client> supprimerCient(@PathVariable Integer clientId) {
+		clientDao.deleteById(clientId);
+		return ResponseEntity.ok().build();
 	}
 
 	/**

@@ -1,36 +1,53 @@
-import React, { useState, useEffect } from 'react';
-import { render } from 'react-dom';
-import BoutonNav from './BoutonNav';
-import SectionCentrale from './SectionCentrale';
+import React from 'react';
+import {
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	NavLink
+} from 'react-router-dom';
+
+import Client from './Client';
+import Vente from './Vente';
 
 class PageEntiere extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state= {
-			pageActive:'Client',
+		this.state = {
+			pageActive: 'Client',
 		}
 	}
 
 	handleClick(page) {
-		this.setState(() => ({pageActive: page}));
-	} 
+		this.setState(() => ({ pageActive: page }));
+	}
 
 	render() {
-		return(
-			<div>
-				<nav className="menu">
-					<ul>
-						<li><BoutonNav 
-							value="Client" onClick={() => this.handleClick("Client")} /></li>
-						<li><BoutonNav 
-							value="Vente" onClick={() => this.handleClick("Vente")} /></li>
-						<li><a href="./Achat">Achats</a></li>
-						<li><a href="./Parametrage">Paramétrage</a></li>
-						<li><a href="./Comptabilite">Comptabilité</a></li>
-					</ul>
-		</nav>				
-        		<SectionCentrale page={this.state.pageActive} />
-			</div>
+		return (
+			<Router>
+				<div>
+					<nav id="navigation">
+						<ul>
+							<li>
+								<NavLink to="/api/v1/client" activeClassName="menu-actif">Client</NavLink>
+							</li>
+							<li>
+								<NavLink to="/api/v1/vente" activeClassName="menu-actif">Vente</NavLink>
+							</li>
+							<li><a href="./Achat">Achats</a></li>
+							<li><a href="./Parametrage">Paramétrage</a></li>
+							<li><a href="./Comptabilite">Comptabilité</a></li>
+						</ul>
+					</nav>
+					<Switch>
+						<Route path="/api/v1/client">
+							<Client />
+						</Route>
+						<Route path="/api/v1/vente">
+							<Vente />
+						</Route>
+					</Switch>
+				</div>
+			</Router>
 		)
 	}
 }

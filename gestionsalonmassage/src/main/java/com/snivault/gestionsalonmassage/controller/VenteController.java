@@ -12,7 +12,7 @@ import com.snivault.gestionsalonmassage.dao.ChequeCadeauDao;
 import com.snivault.gestionsalonmassage.model.ChequeCadeau;
 
 @RestController
-@RequestMapping("ventes")
+@RequestMapping("api/v1/vente")
 @CrossOrigin("*")
 public class VenteController {
 	@Autowired

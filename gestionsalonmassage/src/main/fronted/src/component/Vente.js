@@ -14,7 +14,7 @@ class VenteTable extends React.Component {
 			<table>
 					<VenteTableHeader />
 				{this.props.ventes.map((vente,index) => {
-					return (<tbody>
+					return (<tbody key={vente.venteId}>
 							<tr><td>{vente.dateVente}</td>
 							<td>{vente.client.nomPrenom}</td>
 							<td>{vente.montantEncaisse}</td>
@@ -48,7 +48,7 @@ function Ventes () {
   const [ventes, setVentes] = useState([]);
 
   const fetchVentes = () => {
-    axios.get("http://localhost:8081/ventes").then(res => {
+    axios.get("http://localhost:8081/api/v1/vente").then(res => {
       console.log(res);
       const data = res.data;
       setVentes(data);

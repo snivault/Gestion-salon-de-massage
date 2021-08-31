@@ -1,5 +1,5 @@
+/*LOGO*/
 #logo-site {
-	position: relative;
     width: 30%;
     text-align: left;
     margin-left:5px;
@@ -21,4 +21,34 @@
 	color: #806fac;
 	font-weight: bold;
 	font-size:1em;
+}
+/*FIN LOGO */
+
+/* NAVIGATION */
+#navigation ul
+{
+	list-style-type: none;
+    display: flex;
+	width: 100%;
+	padding: 0px;
+}
+
+#navigation li
+{
+    margin-right: 15px;
+    border-bottom:3px solid #D3D3D3;
+	padding-bottom: 3px;
+}
+
+#navigation a
+{
+	text-decoration: none;
+	text-transform: none;
+    font-size: 1.2em;
+    color: #181818;
+}
+.menu-actif
+{
+    border-bottom: 3px solid #806fac;
+	padding-bottom: 3px;
 }

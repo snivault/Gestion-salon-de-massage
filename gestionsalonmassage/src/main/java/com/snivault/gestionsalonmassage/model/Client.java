@@ -1,6 +1,7 @@
 package com.snivault.gestionsalonmassage.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -18,6 +19,8 @@ import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.thymeleaf.util.ListUtils;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -30,8 +33,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "c_client")
 @NamedEntityGraph(name = "client.listproblematiques", attributeNodes = @NamedAttributeNode("listProblematiques"))
 @NamedEntityGraph(name = "client.listcasecochee", attributeNodes = @NamedAttributeNode("listCaseCochees"))
-public class Client implements Serializable {
-
+public class Client implements Serializable, Cloneable {
 	/** Generated id. */
 	private static final long serialVersionUID = -2809720185693987287L;
 
@@ -51,7 +53,7 @@ public class Client implements Serializable {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "client")
 	private List<CaseCocheeFidelite> listCaseCochees;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
 	@JoinTable(name = "c_client_problematique", joinColumns = @JoinColumn(name = "c_client_id"), inverseJoinColumns = @JoinColumn(name = "c_problematique_id"))
 	private List<Problematique> listProblematiques;
 
@@ -73,6 +75,28 @@ public class Client implements Serializable {
 
 	@Column(name = "c_telephone")
 	private Integer telephone;
+
+	@Override
+	public Client clone() throws CloneNotSupportedException {
+		Client copie = (Client) super.clone();
+
+		copie.adresse = adresse;
+		copie.clientId = clientId;
+		if (!ListUtils.isEmpty(listCaseCochees)) {
+			copie.listCaseCochees = new ArrayList<CaseCocheeFidelite>(listCaseCochees);
+		}
+		if (!ListUtils.isEmpty(listProblematiques)) {
+			copie.listProblematiques = new ArrayList<Problematique>(listProblematiques);
+		}
+		copie.mail = mail;
+		copie.nom = nom;
+		copie.origineContact = origineContact.clone();
+		copie.prenom = prenom;
+		copie.pseudoFacebook = pseudoFacebook;
+		copie.telephone = telephone;
+
+		return copie;
+	}
 
 	/**
 	 * @return the adresse

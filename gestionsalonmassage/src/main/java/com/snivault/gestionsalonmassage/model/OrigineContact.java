@@ -14,7 +14,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "c_origine_contact")
-public class OrigineContact {
+public class OrigineContact implements Cloneable {
 	@Column(name = "c_libelle")
 	private String libelle;
 
@@ -22,6 +22,14 @@ public class OrigineContact {
 	@GeneratedValue
 	@Column(name = "c_origine_contact_id")
 	private Integer origineContactId;
+
+	@Override
+	protected OrigineContact clone() throws CloneNotSupportedException {
+		OrigineContact copie = (OrigineContact) super.clone();
+		copie.libelle = libelle;
+		copie.origineContactId = origineContactId;
+		return copie;
+	}
 
 	/**
 	 * @return the libelle
